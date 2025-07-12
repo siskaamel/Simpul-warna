@@ -111,12 +111,12 @@
             {{  $slot }}
       </div>
 
-      <footer class="bg-dark text-white pt-4 mt-5" style="background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);">
+      <footer class="bg-dark text-white pt-4 mt-5" style="background: linear-gradient(90deg,rgb(154, 64, 214) 0%,rgb(197, 120, 248) 100%);">
             <div class="container p-3">
                   <div class="row">
                         <div class="col-md-6 mb-3">
-                              <h5 class="mb-3">E-Commerce</h5>
-                              <p class="small">Belanja mudah, cepat, dan aman di toko online kami. Temukan produk favorit Anda dengan harga terbaik.</p>
+                              <h5 class="mb-3">Jewel Junction</h5>
+                              <p class="small">Temukan produk favorit Anda dengan harga terbaik.</p>
                         </div>
                         <div class="col-md-3 mb-3">
                               <h6 class="mb-3">Navigasi</h6>
@@ -130,15 +130,15 @@
                         <div class="col-md-3 mb-3">
                               <h6 class="mb-3">Kontak Kami</h6>
                               <ul class="list-unstyled small">
-                                    <li><i class="bi bi-envelope"></i> info@ecommerce.com</li>
-                                    <li><i class="bi bi-telephone"></i> +62 856 6100 994</li>
+                                    <li><i class="bi bi-envelope"></i> info@JewelJunction.com</li>
+                                    <li><i class="bi bi-telephone"></i> +62 85742531032</li>
                                     <li><i class="bi bi-geo-alt"></i> Tegal, Indonesia</li>
                               </ul>
                         </div>
                   </div>
                   <hr class="bg-secondary">
                   <div class="text-center pb-3">
-                        <small>© {{ date('Y') }} E-Commerce. All rights reserved.</small>
+                        <small>© {{ date('Y') }} Jewel Junction. All rights reserved.</small>
                   </div>
             </div>
       </footer>
