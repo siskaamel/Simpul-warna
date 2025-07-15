@@ -1,5 +1,5 @@
 <div>
-    <nav class="navbar navbar-expand-lg p-3" style="background: linear-gradient(90deg,rgb(186, 64, 235) 0%,rgb(196, 79, 231) 100%);">
+    <nav class="navbar navbar-expand-lg p-3" style="background: linear-gradient(90deg,rgba(86, 12, 114, 1) 0%,rgba(62, 12, 77, 1) 100%);">
         <div class="container">
             <a class="navbar-brand text-white" href="/">Jewel Junction</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
