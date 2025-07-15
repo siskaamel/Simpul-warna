@@ -28,6 +28,29 @@ class ProductCategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function sync($id, Request $request)
+    {
+        $category = Categories::findOrFail($id);
+        
+        $response = Http::post('https://api.phb-umkm.my.id/api/product-category/sync', [
+            'client_id' => env('CLIENT_ID'),
+            'client_secret' => env('CLIENT_SECRET'),
+            'seller_product_category_id' => (string) $category->id,
+            'name' => $category->name,
+            'description' => $category->description,
+            'is_active' => $request->is_active == 1 ? false : true,
+        ]);
+
+        if ($response->successful() && isset($response['product_category_id'])) {
+            $category->hub_category_id = $request->is_active == 1 ? null : $response['product_category_id'];
+            $category->save();
+        }
+
+        session()->flash('successMessage', 'Category Synced Successfully');
+        return redirect()->back();
+    }
+
     public function create()
     {
         return view('dashboard.categories.create');

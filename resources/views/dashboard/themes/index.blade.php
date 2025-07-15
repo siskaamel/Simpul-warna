@@ -1,22 +1,8 @@
-<x-layouts.app :title="__('Themes')">
+<x-layouts.app :title="__('Products')">
     <div class="relative mb-6 w-full">
-        <flux:heading size="xl">Themes</flux:heading>
-        <flux:subheading size="lg" class="mb-6">Manage data Theme</flux:heading>
+        <flux:heading size="xl">Products</flux:heading>
+        <flux:subheading size="lg" class="mb-6">Manage data Product</flux:subheading>
         <flux:separator variant="subtle" />
-    </div>
-
-    <div class="flex justify-between items-center mb-4">
-        <div>
-            <form action="{{ route('themes.index') }}" method="get">
-                @csrf
-                <flux:input icon="magnifying-glass" name="q" value="{{ $q }}" placeholder="Search Product themes" />
-            </form>
-        </div>
-        <div>
-            <flux:button icon="plus">
-                <flux:link href="{{ route('themes.create') }}" variant="subtle">Add New Theme</flux:link>
-            </flux:button>
-        </div>
     </div>
 
     @if(session()->has('successMessage'))
@@ -29,77 +15,38 @@
         <table class="min-w-full leading-normal">
             <thead>
                 <tr>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        ID
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Name
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Description
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Folder
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Status
-                    </th>
-                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        Actions
-                    </th>
+                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase">ID</th>
+                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase">Name</th>
+                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase">Stock</th>
+                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase">Price</th>
+                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase">Sync</th>
+                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-xs font-semibold text-gray-600 uppercase">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($themes as $key=>$theme)
+                @foreach($products as $product)
                     <tr>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $key+1 }}
-                            </p>
+                        <td class="px-5 py-5 border-b bg-white text-sm">{{ $product->id }}</td>
+                        <td class="px-5 py-5 border-b bg-white text-sm">{{ $product->name }}</td>
+                        <td class="px-5 py-5 border-b bg-white text-sm">{{ $product->stock }}</td>
+                        <td class="px-5 py-5 border-b bg-white text-sm">{{ number_format($product->price, 0) }}</td>
+                        <td class="px-5 py-5 border-b bg-white text-sm">
+                            <form id="sync-product-{{ $product->id }}" action="{{ route('products.sync', $product->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="is_active" value="{{ $product->hub_product_id ? 1 : 0 }}">
+                                <flux:switch 
+                                    {{ $product->hub_product_id ? 'checked' : '' }} 
+                                    onchange="document.getElementById('sync-product-{{ $product->id }}').submit()" />
+                            </form>
                         </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $theme->name }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $theme->description }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $theme->folder }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900">
-                                {{  $theme->status }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-
-                            <flux:dropdown>
-                                <flux:button icon:trailing="chevron-down">Actions</flux:button>
-
-                                <flux:menu>
-                                    <flux:menu.item icon="pencil" href="{{ route('themes.edit', $theme->id) }}">Edit</flux:menu.item>
-                                    <flux:menu.item icon="trash" variant="danger" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this theme?')) document.getElementById('delete-form-{{ $theme->id }}').submit();">Delete</flux:menu.item>
-                                    <form id="delete-form-{{ $theme->id }}" action="{{ route('themes.destroy', $theme->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </flux:menu>
-                            </flux:dropdown>
+                        <td class="px-5 py-5 border-b bg-white text-sm">
+                            <!-- Actions: Edit/Delete -->
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
 
-        <div class="mt-3">
-            {{ $themes->links() }}
-        </div>
+        <div class="mt-3">{{ $products->links() }}</div>
     </div>
-    
 </x-layouts.app>

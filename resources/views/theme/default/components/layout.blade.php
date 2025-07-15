@@ -10,31 +10,31 @@
 
    <style>
       body {
-         background-image: url('/images/bg_uas.jpeg'); 
+         background-image: url('/images/bg2.jpeg'); 
          background-size: cover;
          background-repeat: no-repeat;
          background-attachment: fixed;
          background-position: center;
          min-height: 100vh;
       }
-
-      .container-fluid {
-         background-color: transparent !important; /* Putih semi transparan agar teks terbaca */
-         border-radius: 0;
-         color: white;
-      }
-
-      .container-fluid h1,
-      .container-fluid h2,
-      .container-fluid h3,
-      .container-fluid p,
-      .container-fluid a,
-      .container-fluid li,
-      .container-fluid span,
-      .container-fluid small {
-            color: white !important;
-      }
       
+      .product-card,
+      .product-card .card-body,
+      .product-card .card-title,
+      .product-card .card-text {
+         color: #000 !important;
+      }
+
+      .product-card .btn {
+         background-color: #e6e6e6;
+         color: #000 !important;
+         border: none;
+      }
+
+      .product-card .btn:hover {
+         background-color: #ccc;
+         color: #000 !important;
+      }
 
       .category-card {
          transition: transform 0.3s;
@@ -131,7 +131,7 @@
          {{  $slot }}
    </div>
 
-   <footer class="bg-dark text-white pt-4 mt-5" style="background: linear-gradient(90deg,rgba(87, 17, 134, 1) 0%,rgba(54, 13, 81, 1) 100%);">
+   <footer class="bg-dark text-white pt-4 mt-5" style="background: linear-gradient(90deg,rgba(243, 120, 218, 1) 0%,rgba(239, 129, 215, 1) 100%);">
          <div class="container p-3">
                <div class="row">
                      <div class="col-md-6 mb-3">
