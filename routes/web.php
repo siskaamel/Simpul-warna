@@ -9,7 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\ApiController;
@@ -31,6 +31,14 @@ Route::group(['middleware'=>['is_customer_login']], function(){
         Route::delete('cart/remove/{id}', 'remove')->name('cart.remove');
         Route::patch('cart/update/{id}', 'update')->name('cart.update');
     });
+});
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');
+    Route::post('/products/{id}/sync', [AdminProductController::class, 'sync'])->name('admin.products.sync');
+
+    Route::get('/categories', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
+    Route::post('/categories/{id}/sync', [AdminCategoryController::class, 'sync'])->name('admin.categories.sync');
 });
 
 Route::group(['prefix'=>'customer'], function(){
@@ -56,9 +64,16 @@ Route::group(['prefix'=>'customer'], function(){
     });
 });
 
+Route::get('checkout', [CheckoutController::class, 'show'])
+    ->name('checkout.index')
+    ->middleware('is_customer_login');
+
+Route::post('checkout', [CheckoutController::class, 'process'])
+     ->name('checkout.process')
+     ->middleware('is_customer_login');
 
 
-Route::group(['prefix'=>'dashboard','middleware'=>['auth','verified']], function(){
+Route::group(['prefix'=>'dashboard','middleware'=>['auth']], function(){
     Route::get('/',[DashboardController::class,'index'])->name('dashboard');
 
     Route::resource('categories',ProductCategoryController::class);

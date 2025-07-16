@@ -135,7 +135,7 @@
          <div class="container p-3">
                <div class="row">
                      <div class="col-md-6 mb-3">
-                           <h5 class="mb-3">Jewel Junction</h5>
+                           <h5 class="mb-3">Simpul Warna</h5>
                            <p class="small">Temukan produk favorit Anda dengan harga terbaik.</p>
                      </div>
                      <div class="col-md-3 mb-3">
@@ -158,7 +158,7 @@
                </div>
                <hr class="bg-secondary">
                <div class="text-center pb-3">
-                     <small>© {{ date('Y') }} Jewel Junction. All rights reserved.</small>
+                     <small>© {{ date('Y') }} Simpul Warna. All rights reserved.</small>
                </div>
          </div>
    </footer>

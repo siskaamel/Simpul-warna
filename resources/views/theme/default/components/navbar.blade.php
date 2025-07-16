@@ -1,7 +1,7 @@
 <div>
     <nav class="navbar navbar-expand-lg p-3" style="background: linear-gradient(90deg,rgba(246, 136, 229, 1) 0%,rgba(244, 135, 217, 1) 100%);">
         <div class="container">
-            <a class="navbar-brand text-white" href="/">Jewel Junction</a>
+            <a class="navbar-brand text-white" href="/">Simpul Warna</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
