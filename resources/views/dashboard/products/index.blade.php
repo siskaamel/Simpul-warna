@@ -45,10 +45,13 @@
                         SKU
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                        PRICE
+                        Price
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Active
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Sync
                     </th>
                     <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Created At
@@ -59,53 +62,51 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($products as $key=>$product)
+                @foreach($products as $key => $product)
                     <tr>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $key+1 }}
+                                {{ $key + 1 }}
                             </p>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                @if($product->image_url)
-                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="h-10 w-10 object-cover rounded">
+                            @if($product->image_url)
+                                <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="h-10 w-10 object-cover rounded">
+                            @else
+                                <div class="h-10 w-10 bg-gray-200 flex items-center justify-center rounded">
+                                    <span class="text-gray-500 text-sm">N/A</span>
+                                </div>
+                            @endif
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            {{ $product->name }}
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            {{ $product->category ? $product->category->name : 'N/A' }}
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            {{ $product->sku }}
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            {{ $product->price }}
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            {{ $product->is_active ? 'Yes' : 'No' }}
+                        </td>
+                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <form id="sync-product-{{ $product->id }}" action="{{ route('products.sync', $product->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="is_active" value="{{ $product->hub_product_id ? 1 : 0 }}">
+
+                                @if($product->hub_product_id)
+                                    <flux:switch checked onchange="document.getElementById('sync-product-{{ $product->id }}').submit()" />
                                 @else
-                                    <div class="h-10 w-10 bg-gray-200 flex items-center justify-center rounded">
-                                        <span class="text-gray-500 text-sm">N/A</span>
-                                    </div>
+                                    <flux:switch onchange="document.getElementById('sync-product-{{ $product->id }}').submit()" />
                                 @endif
-                            </p>
+                            </form>
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $product->name }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $product->category ? $product->category->name : 'N/A' }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $product->sku }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $product->price }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $product->is_active ? 'Yes' : 'No' }}
-                            </p>
-                        </td>
-                        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                            <p class="text-gray-900 whitespace-no-wrap">
-                                {{ $product->created_at }}
-                            </p>
+                            {{ $product->created_at }}
                         </td>
                         <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                             <flux:dropdown>

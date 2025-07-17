@@ -44,10 +44,10 @@
          transform: scale(1.05);
          box-shadow: 0 3px 6px rgba(0,0,0,0.15);
       }
-      .category-img {
+      /* .category-img {
          height: 120px;
          object-fit: cover;
-      }
+      } */
       .card-body {
          padding: 0.75rem;
       }
