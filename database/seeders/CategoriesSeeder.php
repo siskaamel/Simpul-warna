@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Categories;
+use Illuminate\Support\Carbon;
 
 class CategoriesSeeder extends Seeder
 {
@@ -13,33 +13,39 @@ class CategoriesSeeder extends Seeder
      */
     public function run(): void
     {
-        Categories::insert(
+        Categories::insert([
             [
-                [
-                    'name' => 'Gelang', 
-                    'slug' => 'Gelang',
-                    'description' => 'Gelang Tali',
-                ],
-                [
-                    'name' => 'Kalung', 
-                    'slug' => 'Kalung',
-                    'description' => 'Kalung',
-
-                ],
-                [
-                    'name' => 'Cincin', 
-                    'slug' => 'Cincin',
-                    'description' => 'Cincin',
-
-                ],
-                [
-                    'name' => 'Anting', 
-                    'slug' => 'Anting',
-                    'description' => 'Anting',
-
-                ],
-            ]
-        );
-        
+                'name'        => 'Gelang',
+                'slug'        => 'gelang',
+                'description' => 'Kategori untuk aksesoris gelang',
+                'image'       => 'images/gelang tali bunga.jpeg',
+                'created_at'  => Carbon::now(),
+                'updated_at'  => Carbon::now(),
+            ],
+            [
+                'name'        => 'Kalung',
+                'slug'        => 'kalung',
+                'description' => 'Kategori Aksesoris Kalung',
+                'image'       => 'images/kalung salib.jpeg',
+                'created_at'  => Carbon::now(),
+                'updated_at'  => Carbon::now(),
+            ],
+            [
+                'name'        => 'Cincin',
+                'slug'        => 'cincin',
+                'description' => 'Kategori Aksesoris Cincin',
+                'image'       => 'images/cincin list hitam.jpeg',
+                'created_at'  => Carbon::now(),
+                'updated_at'  => Carbon::now(),
+            ],
+            [
+                'name'        => 'Anting',
+                'slug'        => 'anting',
+                'description' => 'Kategori Aksesoris Anting',
+                'image'       => 'images/anting kupu.jpeg',
+                'created_at'  => Carbon::now(),
+                'updated_at'  => Carbon::now(),
+            ],
+        ]);
     }
 }

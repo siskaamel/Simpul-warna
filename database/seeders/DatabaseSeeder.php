@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,13 +12,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Matikan pengecekan foreign key
+        Schema::disableForeignKeyConstraints();
 
+        // Panggil semua seeder sesuai urutan dependency
         $this->call([
             CategoriesSeeder::class,
-            ProductSeeder::class,
             ThemeSeeder::class,
-            // Add other seeders here as needed
+            ProductsTableSeeder::class,
+            OrdersTableSeeder::class,
+            OrderDetailsTableSeeder::class,
         ]);
+
+        // Aktifkan kembali pengecekan foreign key
+        Schema::enableForeignKeyConstraints();
     }
 }
