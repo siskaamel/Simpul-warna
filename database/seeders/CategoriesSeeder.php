@@ -16,34 +16,27 @@ class CategoriesSeeder extends Seeder
         Categories::insert(
             [
                 [
-                    'name' => 'Electronics', 
-                    'slug' => 'electronics',
-                    'description' => 'Electronic gadgets and devices',
-                    'image'=> 'https://placehold.co/300x300?text=Electronics'
+                    'name' => 'Gelang', 
+                    'slug' => 'Gelang',
+                    'description' => 'Gelang Tali',
                 ],
                 [
-                    'name' => 'Books', 
-                    'slug' => 'books',
-                    'description' => 'Various kinds of books',
-                    'image'=> 'https://placehold.co/300x300?text=Books'
+                    'name' => 'Kalung', 
+                    'slug' => 'Kalung',
+                    'description' => 'Kalung',
+
                 ],
                 [
-                    'name' => 'Clothing', 
-                    'slug' => 'clothing',
-                    'description' => 'Men and women clothing',
-                    'image'=> 'https://placehold.co/300x300?text=Clothing'
+                    'name' => 'Cincin', 
+                    'slug' => 'Cincin',
+                    'description' => 'Cincin',
+
                 ],
                 [
-                    'name' => 'Home & Kitchen', 
-                    'slug' => 'home-kitchen',
-                    'description' => 'Home appliances and kitchenware',
-                    'image'=> 'https://placehold.co/300x300?text=Home+%26+Kitchen'
-                ],
-                [
-                    'name' => 'Sports', 
-                    'slug' => 'sports',
-                    'description' => 'Sports equipment and accessories',
-                    'image'=> 'https://placehold.co/300x300?text=Sports'
+                    'name' => 'Anting', 
+                    'slug' => 'Anting',
+                    'description' => 'Anting',
+
                 ],
             ]
         );
